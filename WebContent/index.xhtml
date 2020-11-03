@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:e="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>BiblioBosque</title>
+	<h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
+	<script src="resources/js/jquery-3.5.1.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
+</h:head>
+<header>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a href="/TallerJSF"><h:graphicImage
+				value="resources/img/logo_uni.jpeg" /></a>
+		<h1 class="justify-content-center">BilbioBosque</h1>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link"
+					href="${pageContext.request.contextPath}/TallerJSF/faces/login.xhtml">Mi
+						Cuenta</a></li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<h:body>
+	<br />
+	<div class="container">
+		<h:form class="form d-flex justify-content-center" action="GET">
+			<p:inputText pt:placeholder="Titulo" />
+			<p:selectOneMenu id="console" style="width:125px">
+				<c:selectItem itemLabel="Género" itemValue="" />
+				<c:selectItem itemLabel="Terror" itemValue="Terror" />
+				<c:selectItem itemLabel="Ciencia" itemValue="Ciencia" />
+				<c:selectItem itemLabel="Literatura Colombiana"
+					itemValue="Literatura Colombiana" />
+				<c:selectItem itemLabel="Fantasía" itemValue="Fantasia" />
+				<c:selectItem itemLabel="Drama" itemValue="Drama" />
+				<c:selectItem itemLabel="Historia" itemValue="Historia" />
+			</p:selectOneMenu>
+			<p:commandButton value="Buscar Libros"></p:commandButton>
+		</h:form>
+		<br />
+		<p:dataTable var="book" value="#{dtBasicView.books}">
+			<p:column headerText="Título">
+			</p:column>
+			<p:column headerText="Género">
+			</p:column>
+			<p:column headerText="Rating">
+			</p:column>
+		</p:dataTable>
+	</div>
+</h:body>
+</html>

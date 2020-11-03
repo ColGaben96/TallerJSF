@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsf/core"
+	xmlns:e="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>BiblioBosque</title>
+	<h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
+	<script src="resources/js/jquery-3.5.1.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
+</h:head>
+<header>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a href="/TallerJSF"><h:graphicImage
+				value="resources/img/logo_uni.jpeg" /></a>
+		<h1 class="justify-content-center">BilbioBosque</h1>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link"
+					href="${pageContext.request.contextPath}/TallerJSF/faces/login.xhtml">Mi Cuenta</a></li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<h:body>
+	<h1 style="text-align: center;">Iniciar Sesion</h1>
+	<br />
+	<div class="container">
+		<h:form id="loginForm" class="form d-flex justify-content-center" action="POST">
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:inputText id="username" class="w-100" pt:placeholder="Usuario" />
+				<p:password id="password" class="w-100" pt:placeholder="Contraseña" />
+				<p:selectBooleanCheckbox
+					itemLabel="Recordarme" required="true">
+					<c:ajax render="@this es requerido" />
+				</p:selectBooleanCheckbox>
+			</h:panelGrid>
+		</h:form>
+		<h:form class="form d-flex justify-content-center" required="true">
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:linkButton class="btn btn-primary" value="Registrarse"  href="${pageContext.request.contextPath}/TallerJSF/faces/signup.xhtml"> </p:linkButton>
+				<p:linkButton class="btn btn-secondary" value="Iniciar Sesion"  href="${pageContext.request.contextPath}/TallerJSF/faces/index.xhtml"> </p:linkButton>
+			</h:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>
