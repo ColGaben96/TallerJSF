@@ -9,8 +9,7 @@
 <h:head>
 	<title>BiblioBosque</title>
 	<h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
-	<script src="resources/js/jquery-3.5.1.js"></script>
-	<script src="resources/js/bootstrap.js"></script>
+	<h:outputScript library="js" name="bootstrap.js"></h:outputScript>
 </h:head>
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,7 +36,7 @@
 	<div class="container">
 		<h:form class="form d-flex justify-content-center" action="GET">
 			<p:inputText pt:placeholder="Titulo" />
-			<p:selectOneMenu id="console" style="width:125px">
+			<p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
 				<c:selectItem itemLabel="Género" itemValue="" />
 				<c:selectItem itemLabel="Terror" itemValue="Terror" />
 				<c:selectItem itemLabel="Ciencia" itemValue="Ciencia" />
