@@ -15,7 +15,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a href="/TallerJSF"><h:graphicImage
 				value="resources/img/logo_uni.jpeg" /></a>
-		<h1 class="justify-content-center">BilbioBosque</h1>
+		<h1>BiblioBosque</h1>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -25,7 +25,8 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/TallerJSF/faces/login.xhtml">Mi Cuenta</a></li>
+					href="${pageContext.request.contextPath}/TallerJSF/faces/login.xhtml">Mi
+						Cuenta</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -33,23 +34,26 @@
 <h:body>
 	<h1 style="text-align: center;">Iniciar Sesion</h1>
 	<br />
-	<div class="container">
-		<h:form id="loginForm" class="form d-flex justify-content-center" action="POST">
+	<div class="container d-flex justify-content-center">
+		<h:panelGrid columns="1" cellpadding="5">
+			<h:form id="loginForm" class="form"
+			action="GET" onsubmit="${pageContext.request.contextPath}/TallerJSF/CheckUser">
 			<h:panelGrid columns="1" cellpadding="5">
-				<p:inputText id="username" class="w-100" pt:placeholder="Usuario" />
-				<p:password id="password" class="w-100" pt:placeholder="Contraseña" />
-				<p:selectBooleanCheckbox
-					itemLabel="Recordarme" required="true">
-					<c:ajax render="@this es requerido" />
+				<p:inputText id="username" class="w-100" pt:placeholder="Usuario"
+					required="true" />
+				<p:password id="password" class="w-100" pt:placeholder="Contraseña"
+					required="true" />
+				<p:selectBooleanCheckbox itemLabel="Recordarme">
 				</p:selectBooleanCheckbox>
 			</h:panelGrid>
 		</h:form>
-		<h:form class="form d-flex justify-content-center" required="true">
-			<h:panelGrid columns="2" cellpadding="5">
-				<p:linkButton class="btn btn-primary" value="Registrarse"  href="${pageContext.request.contextPath}/TallerJSF/faces/signup.xhtml"> </p:linkButton>
-				<p:linkButton class="btn btn-secondary" value="Iniciar Sesion"  href="${pageContext.request.contextPath}/TallerJSF/faces/index.xhtml"> </p:linkButton>
-			</h:panelGrid>
-		</h:form>
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:linkButton class="btn btn-primary" value="Registrarse"
+				href="${pageContext.request.contextPath}/TallerJSF/faces/signup.xhtml" />
+			<p:linkButton class="btn btn-secondary" value="Iniciar Sesion"
+				href="${pageContext.request.contextPath}/TallerJSF/CheckUser" />
+		</h:panelGrid>
+		</h:panelGrid>
 	</div>
 </h:body>
 </html>

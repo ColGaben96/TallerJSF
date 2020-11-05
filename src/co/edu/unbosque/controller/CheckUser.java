@@ -26,9 +26,12 @@ public class CheckUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Controller c = new Controller();
-		//c.getModelo().getDb().checkUser(username, password)
+		if(c.getModelo().getDb().checkUser(request.getAttribute("username").toString(), request.getAttribute("password").toString()) == 1) {
+			response.sendRedirect("{pageContext.request.contextPath}/TallerJSF/crm.xhtml");
+		} else {
+			
+		}
 	}
 
 	/**
@@ -36,7 +39,7 @@ public class CheckUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

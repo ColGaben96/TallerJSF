@@ -15,7 +15,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a href="/TallerJSF"><h:graphicImage
 				value="resources/img/logo_uni.jpeg" /></a>
-		<h1 class="justify-content-center">BilbioBosque</h1>
+		<h1>BiblioBosque</h1>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,18 +35,21 @@
 	<br />
 	<div class="container">
 		<h:form class="form d-flex justify-content-center" action="GET">
-			<p:inputText pt:placeholder="Titulo" />
-			<p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
-				<c:selectItem itemLabel="Género" itemValue="" />
-				<c:selectItem itemLabel="Terror" itemValue="Terror" />
-				<c:selectItem itemLabel="Ciencia" itemValue="Ciencia" />
-				<c:selectItem itemLabel="Literatura Colombiana"
-					itemValue="Literatura Colombiana" />
-				<c:selectItem itemLabel="Fantasía" itemValue="Fantasia" />
-				<c:selectItem itemLabel="Drama" itemValue="Drama" />
-				<c:selectItem itemLabel="Historia" itemValue="Historia" />
-			</p:selectOneMenu>
-			<p:commandButton value="Buscar Libros"></p:commandButton>
+			<h:panelGrid columns="3" cellpadding="5">
+				<p:inputText pt:placeholder="Titulo" />
+				<p:selectOneMenu id="console" value="#{selectOneMenuView.console}"
+					style="width:125px">
+					<c:selectItem itemLabel="Género" itemValue="" />
+					<c:selectItem itemLabel="Terror" itemValue="Terror" />
+					<c:selectItem itemLabel="Ciencia" itemValue="Ciencia" />
+					<c:selectItem itemLabel="Literatura Colombiana"
+						itemValue="Literatura Colombiana" />
+					<c:selectItem itemLabel="Fantasía" itemValue="Fantasia" />
+					<c:selectItem itemLabel="Drama" itemValue="Drama" />
+					<c:selectItem itemLabel="Historia" itemValue="Historia" />
+				</p:selectOneMenu>
+				<p:commandButton value="Buscar Libros"></p:commandButton>
+			</h:panelGrid>
 		</h:form>
 		<br />
 		<p:dataTable var="book" value="#{dtBasicView.books}">
