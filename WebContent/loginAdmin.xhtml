@@ -33,26 +33,28 @@
 	</nav>
 </header>
 <h:body>
+	<h1 style="text-align: center;">Iniciar Sesion</h1>
+	<p style="text-align: center;"><i>Portal de Administración</i></p>
 	<br />
-	<div class="container">
-		<h:form class="form d-flex justify-content-center" action="GET">
-			<h:panelGrid columns="3" cellpadding="5">
-				<p:inputText pt:placeholder="Titulo" />
-				<p:selectCheckboxMenu id="genres" label="Géneros a buscar" multiple="true">
-					<c:selectItems value="#{server.db.allGeneres}"></c:selectItems>
-				</p:selectCheckboxMenu>
-				<p:commandButton value="Buscar Libros"></p:commandButton>
+	<div class="container d-flex justify-content-center">
+		<h:panelGrid columns="1" cellpadding="5">
+			 <p:growl id="mensajes" showDetail="true" life="2000" />
+			<h:form id="loginFrm" class="form-group" action="./crmAdmin.xhtml"
+			method="POST">
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:inputText id="username" name = "username" class="w-100" pt:placeholder="Usuario"
+					required="true" value="#{user.username}" />
+				<p:password id="password" name = "password" class="w-100" pt:placeholder="Contraseña"
+					required="true" value="#{user.password}"/>
+				<p:selectBooleanCheckbox itemLabel="Recordarme">
+				</p:selectBooleanCheckbox>
 			</h:panelGrid>
+			<h:panelGrid columns="2" cellpadding="5">
+			<p:linkButton class="btn btn-secondary" value="Registrarse" href="${pageContext.request.contextPath}/TallerJSF/faces/signup.xhtml"/>
+			<p:commandButton class="btn btn-primary" value="Iniciar Sesion" update=":mensajes" action="#{user.loginAdmin()}"/>
+		</h:panelGrid>
 		</h:form>
-		<br />
-		<p:dataTable var="book" value="#{dtBasicView.books}">
-			<p:column headerText="Título">
-			</p:column>
-			<p:column headerText="Género">
-			</p:column>
-			<p:column headerText="Rating">
-			</p:column>
-		</p:dataTable>
+		</h:panelGrid>
 	</div>
 </h:body>
 </html>

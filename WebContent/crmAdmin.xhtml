@@ -35,24 +35,8 @@
 <h:body>
 	<br />
 	<div class="container">
-		<h:form class="form d-flex justify-content-center" action="GET">
-			<h:panelGrid columns="3" cellpadding="5">
-				<p:inputText pt:placeholder="Titulo" />
-				<p:selectCheckboxMenu id="genres" label="Géneros a buscar" multiple="true">
-					<c:selectItems value="#{server.db.allGeneres}"></c:selectItems>
-				</p:selectCheckboxMenu>
-				<p:commandButton value="Buscar Libros"></p:commandButton>
-			</h:panelGrid>
-		</h:form>
-		<br />
-		<p:dataTable var="book" value="#{dtBasicView.books}">
-			<p:column headerText="Título">
-			</p:column>
-			<p:column headerText="Género">
-			</p:column>
-			<p:column headerText="Rating">
-			</p:column>
-		</p:dataTable>
+	<c:set var="nombre" value="#{user.firstname}"></c:set>
+	<h1 style="text-align: center;">¡Hola #{nombre}!</h1>
 	</div>
 </h:body>
 </html>

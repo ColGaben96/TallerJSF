@@ -5,7 +5,8 @@
 	xmlns:e="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
 	<title>BiblioBosque</title>
 	<h:outputStylesheet library="css" name="bootstrap.css"></h:outputStylesheet>
@@ -36,23 +37,22 @@
 	<br />
 	<div class="container d-flex justify-content-center">
 		<h:panelGrid columns="1" cellpadding="5">
-			<h:form id="loginForm" class="form"
-			action="GET" onsubmit="${pageContext.request.contextPath}/TallerJSF/CheckUser">
+			 <p:growl id="mensajes" showDetail="true" life="2000" />
+			<h:form id="loginFrm" class="form-group" action="./crm.xhtml"
+			method="POST">
 			<h:panelGrid columns="1" cellpadding="5">
-				<p:inputText id="username" class="w-100" pt:placeholder="Usuario"
-					required="true" />
-				<p:password id="password" class="w-100" pt:placeholder="Contraseña"
-					required="true" />
+				<p:inputText id="username" name = "username" class="w-100" pt:placeholder="Usuario"
+					required="true" value="#{user.username}" />
+				<p:password id="password" name = "password" class="w-100" pt:placeholder="Contraseña"
+					required="true" value="#{user.password}"/>
 				<p:selectBooleanCheckbox itemLabel="Recordarme">
 				</p:selectBooleanCheckbox>
 			</h:panelGrid>
-		</h:form>
-		<h:panelGrid columns="2" cellpadding="5">
-			<p:linkButton class="btn btn-primary" value="Registrarse"
-				href="${pageContext.request.contextPath}/TallerJSF/faces/signup.xhtml" />
-			<p:linkButton class="btn btn-secondary" value="Iniciar Sesion"
-				href="${pageContext.request.contextPath}/TallerJSF/CheckUser" />
+			<h:panelGrid columns="2" cellpadding="5">
+			<p:linkButton class="btn btn-secondary" value="Registrarse" href="${pageContext.request.contextPath}/TallerJSF/faces/signup.xhtml"/>
+			<p:commandButton class="btn btn-primary" value="Iniciar Sesion" update=":mensajes" action="#{user.login()}"/>
 		</h:panelGrid>
+		</h:form>
 		</h:panelGrid>
 	</div>
 </h:body>

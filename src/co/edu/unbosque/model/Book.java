@@ -3,7 +3,7 @@ package co.edu.unbosque.model;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean
+@ManagedBean(name="book")
 @SessionScoped
 public class Book {
 	private String name, genre;
