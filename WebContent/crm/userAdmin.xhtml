@@ -15,8 +15,8 @@
 </h:head>
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a href="/TallerJSF/faces/crmAdmin.xhtml"><h:graphicImage
-				value="resources/img/logo_uni.jpeg" /></a>
+		<a href="${pageContext.request.contextPath}/TallerJSF/faces/crmAdmin.xhtml"><h:graphicImage
+				value="${pageContext.request.contextPath}/resources/img/logo_uni.jpeg" /></a>
 		<h1>BiblioBosque</h1>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -44,9 +44,33 @@
 	</p:sidebar>
 	<br />
 	<div class="container">
-		<c:attribute name="nombre" value="#{user.firstname}" />
-		<h1 style="text-align: center;">¡Hola ${nombre}!</h1>
-		<p style="text-align: center;">Haz click en Operaciones para continuar</p>
+		<h1 style="text-align: center;">Gestion de Usuarios</h1>
+		<br />
+		<h:form class="form d-flex justify-content-center" action="GET">
+			<h:panelGrid columns="3" cellpadding="5">
+				<p:inputText pt:placeholder="usuario" />
+				<p:commandButton value="Buscar Usuario" icon="fas fa-search"></p:commandButton>
+			</h:panelGrid>
+		</h:form>
+		<br />
+		<p:commandButton value="Agregar" icon="fas fa-plus"></p:commandButton>
+		<p:dataTable var="users" value="#{server.db.allUsers}" rows="50" paginator="true">
+			<p:column headerText="Seleccion">
+			<p:selectBooleanCheckbox></p:selectBooleanCheckbox>
+			</p:column>
+			<p:column headerText="Correo">
+				<h:outputText value="#{users.email}"></h:outputText>
+			</p:column>
+			<p:column headerText="Nombre">
+				<h:outputText value="#{users.firstname} #{users.lastname}"></h:outputText>
+			</p:column>
+			<p:column headerText="Rol">
+				<h:outputText value="#{users.role}"></h:outputText>
+			</p:column>
+			<p:column headerText="Operaciones">
+			<p:commandButton title="Editar" icon="fas fa-cog"></p:commandButton>
+			</p:column>
+		</p:dataTable>
 	</div>
 </h:body>
 </html>

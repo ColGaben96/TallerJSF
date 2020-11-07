@@ -3,14 +3,17 @@ package co.edu.unbosque.model.persistence;
 import java.sql.*;
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.Book;
+import co.edu.unbosque.model.User;
+
 public class DatabaseConnection {
 	
 	private Connection con;
 	private Statement statement;
 	private ResultSet rs;
 	
-	public String getAllBooks() {
-		var msg = "";
+	public ArrayList<String> getAllBookAuthors() {
+		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String user = "uYjgfeTJOv";
@@ -19,10 +22,84 @@ public class DatabaseConnection {
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM books");
 			while(rs.next()) {
-				msg += rs.getString(1)+
-						";"+rs.getString(2)+
-						";"+rs.getString(3)+
-						";"+rs.getString(4)+"\n";
+				msg.add(rs.getString(5));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllBookRatings() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM books");
+			while(rs.next()) {
+				msg.add(rs.getString(4));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllBookGeneres() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM books");
+			while(rs.next()) {
+				msg.add(rs.getString(3));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllBookTitles() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM books");
+			while(rs.next()) {
+				msg.add(rs.getString(2));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<Book> getAllBooks() {
+		var msg = new ArrayList<Book>();
+		var genres = getAllBookGeneres();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM books");
+			while(rs.next()) {
+				msg.add(new Book(rs.getString(2),rs.getString(5),genres,Float.parseFloat(rs.getString(4))));
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -30,7 +107,26 @@ public class DatabaseConnection {
 		return msg;
 	}
 	
-	public ArrayList<String> getAllUsers() {
+	public ArrayList<User> getAllUsers() {
+		var msg = new ArrayList<User>();
+		var genres = getAllUserGeneres();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM users");
+			while(rs.next()) {
+				msg.add(new User(rs.getString(6),rs.getString(7),rs.getString(2),rs.getString(2),rs.getString(4),rs.getInt(5),genres,Date.valueOf(rs.getString(9)),rs.getString(10)));
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllUserMail() {
 		var msg = new ArrayList<String>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -40,8 +136,104 @@ public class DatabaseConnection {
 			statement = con.createStatement();
 			rs = statement.executeQuery("SELECT * FROM users");
 			while(rs.next()) {
-				msg.add(String.valueOf(rs.getString(1)));
+				msg.add(rs.getString(2));
 			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllUserRoles() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM users");
+			while(rs.next()) {
+				msg.add(String.valueOf(rs.getInt(4)));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllUserNames() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM users");
+			while(rs.next()) {
+				msg.add(rs.getString(5)+" "+rs.getString(6));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllUserGeneres() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM users");
+			while(rs.next()) {
+				msg.add(rs.getString(8));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllUserBirthdays() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM users");
+			while(rs.next()) {
+				msg.add(rs.getString(9));
+			}
+			con.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
+	public ArrayList<String> getAllUserSexes() {
+		var msg = new ArrayList<String>();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String user = "uYjgfeTJOv";
+			String pass = "52AqWbXhXq";
+			con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+			statement = con.createStatement();
+			rs = statement.executeQuery("SELECT * FROM users");
+			while(rs.next()) {
+				msg.add(rs.getString(10));
+			}
+			con.close();
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -99,6 +291,20 @@ public class DatabaseConnection {
 		var userarr = getAllUsers();
 		var id = userarr.size();
 		int myresult = statement.executeUpdate("INSERT INTO `users`(`id`, `username`, `email`, `pass`, `role`, `firstname`, `lastname`, `reservedBooks`, `generes`, `birthday`, `sex`) VALUES ("+id+",'"+email+"','"+email+"','"+password+"',"+1+",'"+firstname+"','"+lastname+"','','"+generes+"','"+birthday+"','"+sex+"')");
+		System.out.println("Operation: "+myresult);
+		System.out.println("Added User in pos "+id+" successfully");
+		con.close();
+	}
+	
+	public void createBook(String title, String author, String genre, String rating) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		String user = "uYjgfeTJOv";
+		String pass = "52AqWbXhXq";
+		con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/" + user, user, pass);
+		statement = con.createStatement();
+		var userarr = getAllBooks();
+		var id = userarr.size();
+		int myresult = statement.executeUpdate("INSERT INTO `books`(`id`, `Title`, `Genre`, `Rating`, `Author`) VALUES ("+id+",'"+title+"','"+genre+"','"+rating+"','"+author+"')");
 		System.out.println("Operation: "+myresult);
 		System.out.println("Added User in pos "+id+" successfully");
 		con.close();

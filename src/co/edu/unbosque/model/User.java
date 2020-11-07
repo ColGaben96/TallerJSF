@@ -171,10 +171,10 @@ public class User implements Serializable {
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
 		FacesMessage message = null;
 		DatabaseConnection db = new DatabaseConnection();
-		SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+		SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
 		String convertedGeneres = "";
 		for (int i = 0; i < generes.size(); i++) {
-			convertedGeneres += generes.get(i)+"+";
+			convertedGeneres += generes.get(i);
 		}
 		try {
 			db.createUser(username, email, password, firstname, lastname, convertedGeneres, format.format(birthday), sex);

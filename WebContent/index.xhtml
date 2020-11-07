@@ -41,16 +41,23 @@
 				<p:selectCheckboxMenu id="genres" label="Géneros a buscar" multiple="true">
 					<c:selectItems value="#{server.db.allGeneres}"></c:selectItems>
 				</p:selectCheckboxMenu>
-				<p:commandButton value="Buscar Libros"></p:commandButton>
+				<p:commandButton value="Buscar Libros" icon="fas fa-search"></p:commandButton>
 			</h:panelGrid>
 		</h:form>
+		<h3 style="text-align:center;">Para reservar libros debes iniciar sesion</h3>
 		<br />
-		<p:dataTable var="book" value="#{dtBasicView.books}">
+		<p:dataTable var="books" value="#{server.db.allBooks}" rows="50" paginator="true">
 			<p:column headerText="Título">
+			<h:outputText value="#{books.name}"/>
+			</p:column>
+			<p:column headerText="Autor">
+			<h:outputText value="#{books.author}"/>
 			</p:column>
 			<p:column headerText="Género">
+			<h:outputText value="#{books.genres}"/>
 			</p:column>
 			<p:column headerText="Rating">
+			<h:outputText value="#{books.rating}"/>
 			</p:column>
 		</p:dataTable>
 	</div>

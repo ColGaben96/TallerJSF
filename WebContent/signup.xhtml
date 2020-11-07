@@ -54,7 +54,9 @@
 				<p:selectCheckboxMenu id="genres" value="#{user.generes}" label="Géneros Preferidos" multiple="true" style="width:170px">
 					<c:selectItems value="#{server.db.allGeneres}"></c:selectItems>
 				</p:selectCheckboxMenu>
-				<p:password id="pwd1" pt:placeholder="Contraseña" value="#{user.password}" match="pwd2" required="true"/>
+				<p:password id="pwd1" pt:placeholder="Contraseña" value="#{user.password}" match="pwd2" required="true" maxlength="12">
+					<c:validateLength minimum="5"></c:validateLength>
+				</p:password>
 				<p:password id="pwd2" pt:placeholder="Confirmar Contraseña" required="true" />
 				<p:selectBooleanCheckbox
 					itemLabel="Acepto los términos y Condiciones" required="true"/>
