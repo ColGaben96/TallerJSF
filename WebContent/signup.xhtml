@@ -35,36 +35,29 @@
 	<h1 style="text-align: center;">Registro de Datos</h1>
 	<br />
 	<div class="container">
-		<h:form id="signUpForm" class="form d-flex justify-content-center" action="POST">
+	<p:growl id="mensajes" showDetail="true" life="2000" />
+		<h:form id="signUpForm" class="form d-flex justify-content-center" action="./crm.xhtml" method="post">
 			<h:panelGrid columns="2" cellpadding="5">
-				<p:inputText pt:placeholder="Nombre" required="true">
-					<c:ajax render="@this es requerido" />
-				</p:inputText>
-				<p:inputText pt:placeholder="Apellido" required="true">
-					<c:ajax render="@this es requerido" />
-				</p:inputText>
-				<p:datePicker pt:placeholder="Fecha de Nacimiento" locale="es"
+				<p:inputText pt:placeholder="Nombre" value="#{user.firstname}" required="true"/>
+				<p:inputText pt:placeholder="Apellido" value="#{user.lastname}" required="true"/>
+				<p:datePicker pt:placeholder="Fecha de Nacimiento" value="#{user.birthday}" locale="es"
 					monthNavigator="true" yearNavigator="true" pattern="dd/MM/yyyy"
 					yearRange="1900:2020" required="true" />
-				<p:inputText pt:placeholder="Correo" required="true" />
-				<p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:170px">
+				<p:inputText pt:placeholder="Correo" value="#{user.email}" required="true" />
+				<p:selectOneMenu id="console" value="#{user.sex}" style="width:170px">
 					<c:selectItem itemLabel="Género" itemValue="" />
 					<c:selectItem itemLabel="Hombre" itemValue="Hombre" />
 					<c:selectItem itemLabel="Mujer" itemValue="Mujer" />
 					<c:selectItem itemLabel="Otro" itemValue="Otro" />
 				</p:selectOneMenu>
-				<p:selectCheckboxMenu id="genres" label="Géneros Preferidos" multiple="true" style="width:170px">
+				<p:selectCheckboxMenu id="genres" value="#{user.generes}" label="Géneros Preferidos" multiple="true" style="width:170px">
 					<c:selectItems value="#{server.db.allGeneres}"></c:selectItems>
 				</p:selectCheckboxMenu>
-				<p:password pt:placeholder="Contraseña" required="true">
-					<c:ajax render="@this es requerido" />
-				</p:password>
-				<p:password pt:placeholder="Confirmar Contraseña" />
+				<p:password id="pwd1" pt:placeholder="Contraseña" value="#{user.password}" match="pwd2" required="true"/>
+				<p:password id="pwd2" pt:placeholder="Confirmar Contraseña" required="true" />
 				<p:selectBooleanCheckbox
-					itemLabel="Acepto los términos y Condiciones" required="true">
-					<c:ajax render="@this es requerido" />
-				</p:selectBooleanCheckbox>
-				<p:commandButton value="Registrarse" />
+					itemLabel="Acepto los términos y Condiciones" required="true"/>
+				<p:commandButton value="Registrarse" update=":mensajes" action="#{user.createUser()}" />
 			</h:panelGrid>
 		</h:form>
 	</div>
